@@ -1,77 +1,82 @@
-Tarea 2: Fundamentos del SDK de Stellar (Creación de Cuentas y Pagos XLM)
+# 🪐 Tarea 2: Fundamentos del SDK de Stellar (XLM & Pagos Atómicos)
 
-Este proyecto implementa los pasos fundamentales para interactuar con la Testnet de Stellar utilizando la librería stellar-sdk en un entorno Node.js, siguiendo los objetivos de la Tarea 2.
+Este proyecto implementa los pasos fundamentales para interactuar con la **Testnet de Stellar** utilizando la librería `stellar-sdk` en un entorno **Node.js**, siguiendo los objetivos de la Tarea 2.
 
-🎯 Objetivos de la Tarea 2
+---
 
-Generación y Fondeo de Cuentas: Crear cinco pares de claves criptográficas (Public Key y Secret Key) y activarlas en la Testnet mediante el uso de Friendbot, fondeándolas con 10,000 XLM cada una.
 
-Transacciones Múltiples: Demostrar la capacidad de realizar tres pagos diferentes de manera atómica (en una sola transacción) desde la Cuenta 1 a tres cuentas destino distintas (Cuentas 2, 3 y 4).
+## 🎯 Objetivos de la Tarea 2
 
-Auditoría de Balances: Consultar el balance de las cinco cuentas antes y después de la transacción para verificar la correcta transferencia de fondos.
+| # | Objetivo | Estado |
+|---|-----------|--------|
+| 1 | Generación y Fondeo de Cuentas: Crear 5 pares de claves y fondearlas con 10,000 XLM cada una vía Friendbot. | ✅ Completado |
+| 2 | Transacciones Múltiples: Realizar TRES pagos diferentes de forma atómica (en una sola transacción) desde la Cuenta 1 a las Cuentas 2, 3 y 4. | ✅ Completado |
+| 3 | Auditoría de Balances: Consultar y verificar los balances finales de las 5 cuentas. | ✅ Completado |
 
-🛠️ Estructura del Proyecto
+---
 
-Archivo
+## 🛠️ Estructura del Proyecto
 
-Descripción
+| Archivo | Descripción | Rol Clave |
+|----------|-------------|-----------|
+| `crear-cuenta.js` | Genera 5 pares de claves, las activa y las fondea. Provee las Public/Secret Keys necesarias. | 🔑 Creación & Fondeo |
+| `enviar-pago.js` | Construye una transacción única con 3 operaciones de pago simultáneas, la firma y la envía a la red. | 💳 Pago Atómico |
+| `consultar-balance.js` | Consulta el estado final de las 5 cuentas e imprime una tabla de saldos XLM para la auditoría post-transacción. | 📊 Auditoría |
 
-Rol en la Tarea
+---
 
-crear-cuenta.js
+## 🚀 Guía de Ejecución (Paso a Paso)
 
-Genera 5 pares de claves, las activa y las fondea usando Friendbot. Produce las claves necesarias para los otros scripts.
+### Paso 0: Instalación de Dependencias
 
-1. Creación
+Ejecuta este comando solo si no lo hiciste antes:
 
-enviar-pago.js
-
-Carga la Cuenta 1, construye una transacción con TRES operaciones de pago simultáneas, la firma y la envía a la red.
-
-2. Transacción Múltiple
-
-consultar-balance.js
-
-Consulta el estado de las 5 cuentas e imprime una tabla de los balances XLM antes y después del pago.
-
-3. Auditoría
-
-🚀 Guía de Ejecución
-
-Esta guía asume que ya ejecutaste los scripts, pero sirve para documentar el proceso correcto:
-
-Paso 0: Instalación de Dependencias
-
+```bash
 npm install stellar-sdk
+```
 
+---
 
-Paso 1: Generar Cuentas y Fondeo Inicial
+### Paso 1: Generar Cuentas y Fondeo Inicial
 
-Ejecutar para obtener las 5 claves necesarias.
+Ejecuta primero para obtener tus claves. ¡Guárdalas!
 
+```bash
 node crear-cuenta.js
+```
 
+✅ **Resultado:** Se crean y fondean 5 cuentas, cada una con 10,000 XLM.
 
-👉 RESULTADO: Se crean y fondean 5 cuentas, cada una con 10,000 XLM.
+---
 
-Paso 2: Ejecutar la Transacción Atómica
+### Paso 2: Ejecutar la Transacción Atómica
 
-Antes de ejecutar, asegúrate de haber insertado las claves secretas y públicas en el script enviar-pago.js.
+⚠️ **IMPORTANTE:** Asegúrate de haber insertado las claves secretas y públicas en el script `enviar-pago.js`.
 
+```bash
 node enviar-pago.js
+```
 
+✅ **Resultado:** Se envía una única transacción a la red, confirmando el envío de fondos a las Cuentas 2, 3 y 4.
 
-👉 RESULTADO: Se verifica que la Cuenta 1 tiene saldo suficiente y se envía una única transacción con 3 pagos a las Cuentas 2, 3 y 4.
+---
 
-Paso 3: Auditoría Final de Balances
+### Paso 3: Auditoría Final de Balances
 
-Antes de ejecutar, asegúrate de haber insertado las 5 claves públicas en el script consultar-balance.js.
+⚠️ **IMPORTANTE:** Asegúrate de haber insertado las 5 claves públicas en el script `consultar-balance.js`.
 
+```bash
 node consultar-balance.js
+```
 
+✅ **Resultado:** Se muestra el balance final. La Cuenta 1 disminuye y las Cuentas 2, 3 y 4 aumentan su saldo, verificando la transacción.
 
-👉 RESULTADO: Se muestra el balance final, confirmando que la Cuenta 1 disminuyó su saldo y las Cuentas 2, 3 y 4 aumentaron su saldo en la cantidad enviada.
+---
 
-💾 Estado del Repositorio
+## 💾 Estado del Repositorio
 
-Este código ha sido confirmado y subido a la rama main del repositorio remoto.
+El código de la **Tarea 2** ha sido confirmado y subido exitosamente a la rama `main` del repositorio remoto, superando los desafíos de autenticación.
+
+## ⭐ Frase Memorable
+
+> "Los errores no fueron barreras, fueron la prueba de que entendemos el SDK a nivel de constructor. Código 100% verificado."
