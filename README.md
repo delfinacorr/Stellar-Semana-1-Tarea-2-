@@ -83,34 +83,21 @@ La parte más difícil fue la organización del storage, específicamente:
 Identificar qué tipo de almacenamiento usar (Instance o Persistent): Determinar qué datos debían expirar con el contrato (Instance) y cuáles debían permanecer indefinidamente (Persistent, como los contadores por usuario).
 Manejar los tipos de claves: Definir el enum de claves (StorageKey) de forma que fuera escalable y fácil de leer. Por ejemplo, definir Admin como una clave única de la instancia, mientras que CuentaContador requería una clave compuesta (la Symbol CONTADOR más la Address del usuario).
 El manejo de errores y los tests son cruciales, pero la estructura del storage es el cimiento del contrato; si el estado se almacena incorrectamente, todo lo demás falla.
-## 2. ¿Qué aprendiste sobre el operador ?? ¿Dónde lo usaste? ¿Por qué es útil?
-## ¿Qué aprendiste sobre el operador ??
+## 2. ¿Qué aprendiste sobre el operador ?? 
 El operador ? (el "operador de propagación de errores" en Rust) es una abreviatura sintáctica que simplifica el manejo de los tipos Result<T, E> y Option<T>.
 ## ¿Dónde lo usaste? 
 Se usó principalmente al interactuar con el storage (al leer valores), ya que las funciones como storage().persistent().get() devuelven un Option<T>.
 ## ¿Por qué es útil?
 Reemplaza bloques voluminosos de match o if let con una sola pregunta. Si el valor es None (no se encontró la clave) o un Err, detiene la ejecución de la función actual y devuelve ese valor al llamador, lo que hace el código más legible y conciso.
-## 3. ¿Por qué el orden de validaciones importa? ¿Qué validaste primero? ¿Por qué ese orden?
-¿Por qué el orden de validaciones importa?
+## 3. ¿Por qué el orden de validaciones importa?  
 El orden es crucial por seguridad y eficiencia. Las validaciones de seguridad y permisos deben ir primero para evitar la ejecución no autorizada de código. Las validaciones menos costosas deben preceder a las más costosas.
-¿Qué validaste primero? ¿Por qué ese orden?
+## ¿Qué validaste primero? 
 Se valida primero la autorización de la cuenta (require_auth). Esto garantiza que, si una función solo puede ser llamada por una cuenta específica (ej. el administrador), el contrato detenga la ejecución inmediatamente si la cuenta no está autorizada, garantizando la seguridad.
 ## 4. ¿Entiendes la diferencia entre Instance y Persistent? ¿Qué pusiste en cada uno? ¿Por qué?
-Tipo de Storage
-Duración/Propósito
-¿Qué pusiste?
-¿Por qué?
-Instance
-Persiste solo mientras el contrato sea invocado regularmente.
-StorageKey::Admin y StorageKey::Limite
 Son metadatos del contrato. Si el contrato deja de usarse, no pasa nada si estos se eliminan.
-Persistent
-Persiste indefinidamente, independientemente de la actividad del contrato.
-StorageKey::CuentaContador
-El contador específico de cada usuario debe ser Persistent. El estado del usuario debe recordarse a largo plazo.
+Persistent Persiste indefinidamente, independientemente de la actividad del contrato.
 
-## 5. ¿Por qué usamos String en lugar de Symbol? ¿Qué métodos tiene String que Symbol no tiene? ¿En qué casos usarías cada uno?
-## ¿Por qué usamos String en lugar de Symbol?
+## 5. ¿Por qué usamos String en lugar de Symbol? 
 Usamos String cuando el dato a almacenar es variable, viene del usuario (como un nombre), o es intrínsecamente texto arbitrario.
 ## ¿Qué métodos tiene String que Symbol no tiene?
 String permite operaciones de manipulación de texto complejas (concatenación, segmentación, búsqueda) y puede almacenar datos largos (hasta 10MB). Symbol solo tiene métodos de conversión y comparación de igualdad.
