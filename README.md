@@ -1,5 +1,7 @@
 # 🪐 Tarea 2: Fundamentos del SDK de Stellar (XLM & Pagos Atómicos)
 
+##  ⭐ Los errores no fueron barreras, fueron la prueba de que entendemos el SDK a nivel de constructor. Código 100% verificado.
+
 Este proyecto implementa los pasos fundamentales para interactuar con la **Testnet de Stellar** utilizando la librería `stellar-sdk` en un entorno **Node.js**, siguiendo los objetivos de la Tarea 2.
 
 ---
@@ -108,6 +110,4 @@ String permite operaciones de manipulación de texto complejas (concatenación, 
 | String | Para almacenar datos variables proporcionados por el usuario, como nombres, mensajes, descripciones o URLs. | Un nombre de usuario (como en la función try_transfer). |
 
 
-## ⭐ Frase Memorable
 
-> "Los errores no fueron barreras, fueron la prueba de que entendemos el SDK a nivel de constructor. Código 100% verificado."
